@@ -1,0 +1,138 @@
+﻿@model Shelterer.Models.Shelter
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Shelter</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ObjectTypeId, "ObjectTypeId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ObjectTypeId", String.Empty)
+                @Html.ValidationMessageFor(model => model.ObjectTypeId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Altitude, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Altitude)
+                @Html.ValidationMessageFor(model => model.Altitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MountainRangeId, "MountainRangeId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MountainRangeId", String.Empty)
+                @Html.ValidationMessageFor(model => model.MountainRangeId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Visited, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Visited)
+                @Html.ValidationMessageFor(model => model.Visited)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Owner, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner)
+                @Html.ValidationMessageFor(model => model.Owner)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opening, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Opening)
+                @Html.ValidationMessageFor(model => model.Opening)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location)
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TechnicalCondition, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TechnicalCondition)
+                @Html.ValidationMessageFor(model => model.TechnicalCondition)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks)
+                @Html.ValidationMessageFor(model => model.Remarks)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WaterAccess, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WaterAccess)
+                @Html.ValidationMessageFor(model => model.WaterAccess)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fireplace, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fireplace)
+                @Html.ValidationMessageFor(model => model.Fireplace)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastUpdate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastUpdate)
+                @Html.ValidationMessageFor(model => model.LastUpdate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

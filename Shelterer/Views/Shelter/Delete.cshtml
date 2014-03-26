@@ -1,0 +1,128 @@
+﻿@model Shelterer.Models.Shelter
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Shelter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MountainRange.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MountainRange.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjectType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjectType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Altitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Altitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opening)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opening)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TechnicalCondition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TechnicalCondition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterAccess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterAccess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fireplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fireplace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

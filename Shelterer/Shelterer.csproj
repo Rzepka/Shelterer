@@ -161,6 +161,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShelterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +177,7 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\SheltersContext.cs" />
     <Compile Include="Models\ObjectType.cs" />
+    <Compile Include="Models\SheltersInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -224,6 +226,11 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shelter\Create.cshtml" />
+    <Content Include="Views\Shelter\Delete.cshtml" />
+    <Content Include="Views\Shelter\Details.cshtml" />
+    <Content Include="Views\Shelter\Edit.cshtml" />
+    <Content Include="Views\Shelter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
