@@ -5,11 +5,11 @@ using System.Web;
 
 namespace Shelterer.Models
 {
-    public class Type
+    public class ObjectType
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Object> Objects { get; set; }
+        public virtual ICollection<Shelter> Shelters { get; set; }
 
     }
 }

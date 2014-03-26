@@ -8,11 +8,12 @@ namespace Shelterer.Models
     public class RecordHistory
     {
         public int Id { get; set; }
-        public int ObjectId { get; set; }
+        public int ShelterId { get; set; }
         public string Author { get; set; }
         public string Message { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        //public virtual object Value { get; set; }
 
     }
 }

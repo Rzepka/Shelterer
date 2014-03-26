@@ -10,8 +10,8 @@ namespace Shelterer.Models
     {
         public DbSet<MountainRange> MountainRanges { get; set; }
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Type> Types { get; set; }
-        public DbSet<Object> Objects { get; set; }
+        public DbSet<ObjectType> ObjectTypes { get; set; }
+        public DbSet<Shelter> Shelters { get; set; }
 
         public DbSet<History.DoubleHistory> DoubleHistory { get; set; }
         public DbSet<History.GeoCoordinateHistory> GeoCoordinateHistory { get; set; }
