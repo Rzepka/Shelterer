@@ -30,7 +30,15 @@
                 @Html.DropDownList("ObjectTypeId", String.Empty)
                 @Html.ValidationMessageFor(model => model.ObjectTypeId)
             </div>
-        </div>
+                <a href="/ObjectType/Create" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">Add new</a>
+                <!-- Modal -->
+                <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+                <!-- /.modal -->
+            </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Altitude, new { @class = "control-label col-md-2" })

@@ -7,7 +7,7 @@ using System.Device.Location;
 
 namespace Shelterer.Models
 {
-    public class SheltersInitializer : DropCreateDatabaseAlways<SheltersContext>//DropCreateDatabaseIfModelChanges
+    public class SheltersInitializer : DropCreateDatabaseIfModelChanges<SheltersContext>//DropCreateDatabaseAlways
     {
         protected override void Seed(SheltersContext context)
         {
