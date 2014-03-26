@@ -124,5 +124,32 @@ namespace Shelterer.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        /// Filter classes based on student id
+        /// </summary>
+        /// <param name="RegionId"></param>
+        /// <returns></returns>
+        // GET: /Region/LoadRangesByRegionId?regionId=5
+        [AcceptVerbs(HttpVerbs.Get)]
+        public async Task<JsonResult> LoadRangesByRegionId(string regionId)
+        {
+            var ranges = new List<MountainRange>();
+            if (regionId != "")
+            {
+                Region region = await db.Regions.FindAsync(Convert.ToInt32(regionId));
+                ranges = region.MountainRanges.ToList();
+            }
+            else
+            {
+                ranges = await db.MountainRanges.ToListAsync();
+            }
+            var rangesData = ranges.Select(m => new SelectListItem()
+            {
+                Text = m.MountainRangeName,
+                Value = m.Id.ToString(),
+            });
+            return Json(rangesData, JsonRequestBehavior.AllowGet);
+        }
     }
 }

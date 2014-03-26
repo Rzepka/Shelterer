@@ -11,7 +11,9 @@ namespace Shelterer.Models
         public int Id { get; set; }
         [Display(Name = "Mountain Range")]
         public string MountainRangeName { get; set; }
+        [Display(Name = "Region")]
         public int RegionId { get; set; }
+        [Display(Name = "Region")]
         public virtual Region Region { get; set; }
         public virtual ICollection<Shelter> Shelters { get; set; }
 

@@ -6,12 +6,14 @@
 
 <h2>Create</h2>
 
+<script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/Scripts/CascadeDropdown.js"></script>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{    
+     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+<div class="form-horizontal">
         <h4>Shelter</h4>
         <hr />
         @Html.ValidationSummary(true)
@@ -67,7 +69,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RegionId, "RegionId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("RegionId", String.Empty)
+                @*@Html.DropDownList("RegionId", String.Empty)*@
+                @Html.DropDownListFor(model => model.RegionId,
+                    new SelectList(ViewBag.RegionId as System.Collections.IEnumerable, "Id", "RegionName"),
+                    "Select Region", new { id = "ddlRegions" })
                 @Html.ValidationMessageFor(model => model.RegionId)
             </div>
         </div>
@@ -75,7 +80,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MountainRangeId, "MountainRangeId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MountainRangeId", String.Empty)
+                @*@Html.DropDownList("MountainRangeId", String.Empty)*@
+                @Html.DropDownListFor(model => model.MountainRangeId,
+                    new SelectList(ViewBag.MountainRangeId as System.Collections.IEnumerable, "Id", "MountainRangeName"),
+                    "Select Mountain Range", new { id = "ddlRanges" })
                 @Html.ValidationMessageFor(model => model.MountainRangeId)
             </div>
         </div>
@@ -164,6 +172,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+    @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+    }

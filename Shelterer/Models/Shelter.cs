@@ -16,7 +16,9 @@ namespace Shelterer.Models
         public double? Altitude { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
+        [Display(Name = "Region")]
         public int? RegionId { get; set; }
+        [Display(Name = "Region")]
         public virtual Region Region { get; set; }
         public int? MountainRangeId { get; set; }
         public virtual MountainRange MountainRange { get; set; }

@@ -40,9 +40,11 @@ namespace Shelterer.Controllers
         // GET: /Shelter/Create
         public ActionResult Create()
         {
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName");
+            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName");
             ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName");
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName");
+            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName");
+            ViewBag.MountainRangeId = db.MountainRanges.ToList();
+            ViewBag.RegionId = db.Regions.ToList();
             return View();
         }
 

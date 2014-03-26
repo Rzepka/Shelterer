@@ -8,6 +8,7 @@ namespace Shelterer.Models
 {
     public class Region
     {
+        [Display(Name = "Region")]
         public int Id { get; set; }
         [Display(Name = "Region")]
         public string RegionName { get; set; }
