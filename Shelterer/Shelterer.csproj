@@ -42,6 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -164,7 +165,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\History\DoubleHistory.cs" />
+    <Compile Include="Models\History\GeoCoordinateHistory.cs" />
+    <Compile Include="Models\History\IntHistory.cs" />
+    <Compile Include="Models\History\StringHistory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MountainRange.cs" />
+    <Compile Include="Models\Object.cs" />
+    <Compile Include="Models\History\RecordHistory.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
