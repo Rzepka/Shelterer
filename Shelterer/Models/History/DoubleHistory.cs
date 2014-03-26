@@ -7,7 +7,7 @@ namespace Shelterer.Models.History
 {
     public enum DoubleRecords
     {
-        Altitude
+        Altitude, Latitude, Longitude
     }
     public class DoubleHistory : RecordHistory
     {

@@ -18,7 +18,7 @@ namespace Shelterer.Controllers
         // GET: /Shelter/
         public async Task<ActionResult> Index()
         {
-            var shelters = db.Shelters.Include(s => s.MountainRange).Include(s => s.ObjectType);
+            var shelters = db.Shelters.Include(s => s.MountainRange).Include(s => s.ObjectType).Include(s => s.Region);
             return View(await shelters.ToListAsync());
         }
 
@@ -40,8 +40,9 @@ namespace Shelterer.Controllers
         // GET: /Shelter/Create
         public ActionResult Create()
         {
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "Name");
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "Name");
+            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName");
+            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName");
+            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName");
             return View();
         }
 
@@ -50,7 +51,7 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,ObjectTypeId,Altitude,MountainRangeId,Visited,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
+        public async Task<ActionResult> Create([Bind(Include="Id,Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +60,9 @@ namespace Shelterer.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "Name", shelter.MountainRangeId);
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "Name", shelter.ObjectTypeId);
+            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName", shelter.ObjectTypeId);
+            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 
@@ -76,8 +78,9 @@ namespace Shelterer.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "Name", shelter.MountainRangeId);
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "Name", shelter.ObjectTypeId);
+            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName", shelter.ObjectTypeId);
+            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 
@@ -86,7 +89,7 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,ObjectTypeId,Altitude,MountainRangeId,Visited,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
+        public async Task<ActionResult> Edit([Bind(Include="Id,Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +97,9 @@ namespace Shelterer.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "Name", shelter.MountainRangeId);
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "Name", shelter.ObjectTypeId);
+            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName", shelter.ObjectTypeId);
+            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 

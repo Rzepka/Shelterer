@@ -7,7 +7,8 @@ namespace Shelterer.Models.History
 {
     public enum StringRecords
     {
-        Name, Owner, Opening, Location, TechnicalCondition, Remarks, WaterAccess, Fireplace
+        Name, Owner, Opening, Location, TechnicalCondition, Remarks, WaterAccess, Fireplace,
+        ObjectTypeName, MountainRangeName, RegionName
     }
     public class StringHistory : RecordHistory
     {

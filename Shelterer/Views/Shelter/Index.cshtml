@@ -12,16 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MountainRange.Name)
+            @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ObjectType.Name)
+            @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Region.RegionName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Altitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Visited)
@@ -56,16 +65,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.MountainRange.Name)
+            @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ObjectType.Name)
+            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Region.RegionName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Altitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Visited)

@@ -167,7 +167,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\History\DoubleHistory.cs" />
-    <Compile Include="Models\History\GeoCoordinateHistory.cs" />
     <Compile Include="Models\History\IntHistory.cs" />
     <Compile Include="Models\History\StringHistory.cs" />
     <Compile Include="Models\IdentityModels.cs" />

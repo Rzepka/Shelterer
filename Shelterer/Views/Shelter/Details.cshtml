@@ -11,19 +11,27 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.MountainRange.Name)
+            @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MountainRange.Name)
+            @Html.DisplayFor(model => model.MountainRange.MountainRangeName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ObjectType.Name)
+            @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ObjectType.Name)
+            @Html.DisplayFor(model => model.ObjectType.ObjectTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Region.RegionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region.RegionName)
         </dd>
 
         <dt>
@@ -40,6 +48,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Altitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
         </dd>
 
         <dt>

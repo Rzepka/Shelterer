@@ -7,7 +7,7 @@ namespace Shelterer.Models.History
 {
     public enum IntRecords
     {
-        ObjectTypeId, MountainRangeId
+        ObjectTypeId, RegionId, MountainRangeId
     }
     public class IntHistory : RecordHistory
     {

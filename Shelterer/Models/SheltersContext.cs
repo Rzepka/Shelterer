@@ -14,7 +14,6 @@ namespace Shelterer.Models
         public DbSet<Shelter> Shelters { get; set; }
 
         public DbSet<History.DoubleHistory> DoubleHistory { get; set; }
-        public DbSet<History.GeoCoordinateHistory> GeoCoordinateHistory { get; set; }
         public DbSet<History.IntHistory> IntHistory { get; set; }
         public DbSet<History.StringHistory> StringHistory { get; set; }
 
