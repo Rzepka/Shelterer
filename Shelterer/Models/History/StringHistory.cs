@@ -12,7 +12,6 @@ namespace Shelterer.Models.History
     }
     public class StringHistory : RecordHistory
     {
-        public StringRecords Record { get; set; }
         public string Value { get; set; }
     }
 }

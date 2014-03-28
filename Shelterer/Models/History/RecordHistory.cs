@@ -9,11 +9,10 @@ namespace Shelterer.Models
     {
         public int Id { get; set; }
         public int ShelterId { get; set; }
+        public  int Record { get; set; }
         public string Author { get; set; }
         public string Message { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        //public virtual object Value { get; set; }
-
+        public DateTime? EndDate { get; set; }
     }
 }
