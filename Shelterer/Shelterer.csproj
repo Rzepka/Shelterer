@@ -160,28 +160,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DoubleHistoryController.cs" />
+    <Compile Include="Controllers\FieldInstantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IntHistoryController.cs" />
     <Compile Include="Controllers\MountainRangeController.cs" />
     <Compile Include="Controllers\ObjectTypeController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ShelterController.cs" />
-    <Compile Include="Controllers\StringHistoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\History\DoubleHistory.cs" />
-    <Compile Include="Models\History\IntHistory.cs" />
-    <Compile Include="Models\History\StringHistory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MountainRange.cs" />
+    <Compile Include="Models\FieldInstant.cs" />
     <Compile Include="Models\Shelter.cs" />
-    <Compile Include="Models\History\RecordHistory.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\DbRecord.cs" />
     <Compile Include="Models\SheltersContext.cs" />
     <Compile Include="Models\ObjectType.cs" />
+    <Compile Include="Models\SheltersExtensions.cs" />
     <Compile Include="Models\SheltersInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -252,21 +249,11 @@
     <Content Include="Views\MountainRange\Details.cshtml" />
     <Content Include="Views\MountainRange\Edit.cshtml" />
     <Content Include="Views\MountainRange\Index.cshtml" />
-    <Content Include="Views\DoubleHistory\Create.cshtml" />
-    <Content Include="Views\DoubleHistory\Delete.cshtml" />
-    <Content Include="Views\DoubleHistory\Details.cshtml" />
-    <Content Include="Views\DoubleHistory\Edit.cshtml" />
-    <Content Include="Views\DoubleHistory\Index.cshtml" />
-    <Content Include="Views\IntHistory\Create.cshtml" />
-    <Content Include="Views\IntHistory\Delete.cshtml" />
-    <Content Include="Views\IntHistory\Details.cshtml" />
-    <Content Include="Views\IntHistory\Edit.cshtml" />
-    <Content Include="Views\IntHistory\Index.cshtml" />
-    <Content Include="Views\StringHistory\Create.cshtml" />
-    <Content Include="Views\StringHistory\Delete.cshtml" />
-    <Content Include="Views\StringHistory\Details.cshtml" />
-    <Content Include="Views\StringHistory\Edit.cshtml" />
-    <Content Include="Views\StringHistory\Index.cshtml" />
+    <Content Include="Views\FieldInstant\Create.cshtml" />
+    <Content Include="Views\FieldInstant\Delete.cshtml" />
+    <Content Include="Views\FieldInstant\Details.cshtml" />
+    <Content Include="Views\FieldInstant\Edit.cshtml" />
+    <Content Include="Views\FieldInstant\Index.cshtml" />
     <Content Include="Views\ObjectType\PartialCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>

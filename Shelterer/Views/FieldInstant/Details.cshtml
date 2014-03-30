@@ -1,4 +1,4 @@
-﻿@model Shelterer.Models.History.DoubleHistory
+﻿@model Shelterer.Models.FieldInstant
 
 @{
     ViewBag.Title = "Details";
@@ -7,15 +7,39 @@
 <h2>Details</h2>
 
 <div>
-    <h4>DoubleHistory</h4>
+    <h4>FieldInstant</h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Record)
+            @Html.DisplayNameFor(model => model.TableId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Record)
+            @Html.DisplayFor(model => model.TableId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataTypeId)
         </dd>
 
         <dt>
@@ -24,14 +48,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Value)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelterId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShelterId)
         </dd>
 
         <dt>

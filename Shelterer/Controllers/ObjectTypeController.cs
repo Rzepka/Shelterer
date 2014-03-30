@@ -60,7 +60,8 @@ namespace Shelterer.Controllers
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
                 return RedirectToAction("Index");
-            }            
+            }
+
             return View(objecttype);
         }
 

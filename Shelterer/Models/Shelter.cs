@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Device.Location;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shelterer.Models
 {
-    public class Shelter
+    public class Shelter : DbRecord
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int? ObjectTypeId { get; set; }
         public virtual ObjectType ObjectType { get; set; }
@@ -23,6 +23,7 @@ namespace Shelterer.Models
         public int? MountainRangeId { get; set; }
         public virtual MountainRange MountainRange { get; set; }
         public bool Visited { get; set; }
+        public int? Capacity { get; set; }
         public string Owner { get; set; }
         public string Opening { get; set; }
         public string Location { get; set; }
@@ -34,6 +35,30 @@ namespace Shelterer.Models
         public string Fireplace { get; set; }
         [Display(Name = "Last Update")]
         public DateTime? LastUpdate { get; set; }
+
+        public override Dictionary<string, int> GetFieldIds()
+        {
+            return FieldIds;
+        }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public readonly Dictionary<string, int> FieldIds = new Dictionary<string, int>()
+        {
+            { "Name", 0 },
+            { "ObjectTypeId", 1 },
+            { "Altitude", 2 },
+            { "Latitude", 3 },
+            { "Longitude", 4 },
+            { "RegionId", 5 },
+            { "MountainRangeId", 6 },
+            { "Capacity", 7 },
+            { "Owner", 8 },
+            { "Opening", 9 },
+            { "Location", 10 },
+            { "TechnicalCondition", 11 },
+            { "Remarks", 12 },
+            { "WaterAccess", 13 },
+            { "Fireplace", 14 }
+        };
         
     }
 }

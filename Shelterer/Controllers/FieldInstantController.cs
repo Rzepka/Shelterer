@@ -7,112 +7,111 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Shelterer.Models.History;
 using Shelterer.Models;
 
 namespace Shelterer.Controllers
 {
-    public class IntHistoryController : Controller
+    public class FieldInstantController : Controller
     {
         private SheltersContext db = new SheltersContext();
 
-        // GET: /IntHistory/
+        // GET: /FieldInstant/
         public async Task<ActionResult> Index()
         {
-            return View(await db.IntHistory.ToListAsync());
+            return View(await db.FieldInstants.ToListAsync());
         }
 
-        // GET: /IntHistory/Details/5
+        // GET: /FieldInstant/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IntHistory inthistory = await db.IntHistory.FindAsync(id);
-            if (inthistory == null)
+            FieldInstant fieldinstant = await db.FieldInstants.FindAsync(id);
+            if (fieldinstant == null)
             {
                 return HttpNotFound();
             }
-            return View(inthistory);
+            return View(fieldinstant);
         }
 
-        // GET: /IntHistory/Create
+        // GET: /FieldInstant/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /IntHistory/Create
+        // POST: /FieldInstant/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Record,Value,ShelterId,Author,Message,StartDate,EndDate")] IntHistory inthistory)
+        public async Task<ActionResult> Create([Bind(Include="Id,TableId,RecordId,FieldId,DataTypeId,Value,Author,Message,StartDate,EndDate")] FieldInstant fieldinstant)
         {
             if (ModelState.IsValid)
             {
-                db.IntHistory.Add(inthistory);
+                db.FieldInstants.Add(fieldinstant);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(inthistory);
+            return View(fieldinstant);
         }
 
-        // GET: /IntHistory/Edit/5
+        // GET: /FieldInstant/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IntHistory inthistory = await db.IntHistory.FindAsync(id);
-            if (inthistory == null)
+            FieldInstant fieldinstant = await db.FieldInstants.FindAsync(id);
+            if (fieldinstant == null)
             {
                 return HttpNotFound();
             }
-            return View(inthistory);
+            return View(fieldinstant);
         }
 
-        // POST: /IntHistory/Edit/5
+        // POST: /FieldInstant/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Record,Value,ShelterId,Author,Message,StartDate,EndDate")] IntHistory inthistory)
+        public async Task<ActionResult> Edit([Bind(Include="Id,TableId,RecordId,FieldId,DataTypeId,Value,Author,Message,StartDate,EndDate")] FieldInstant fieldinstant)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inthistory).State = EntityState.Modified;
+                db.Entry(fieldinstant).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(inthistory);
+            return View(fieldinstant);
         }
 
-        // GET: /IntHistory/Delete/5
+        // GET: /FieldInstant/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IntHistory inthistory = await db.IntHistory.FindAsync(id);
-            if (inthistory == null)
+            FieldInstant fieldinstant = await db.FieldInstants.FindAsync(id);
+            if (fieldinstant == null)
             {
                 return HttpNotFound();
             }
-            return View(inthistory);
+            return View(fieldinstant);
         }
 
-        // POST: /IntHistory/Delete/5
+        // POST: /FieldInstant/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            IntHistory inthistory = await db.IntHistory.FindAsync(id);
-            db.IntHistory.Remove(inthistory);
+            FieldInstant fieldinstant = await db.FieldInstants.FindAsync(id);
+            db.FieldInstants.Remove(fieldinstant);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

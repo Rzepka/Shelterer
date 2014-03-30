@@ -10,10 +10,10 @@
 <script type="text/javascript" src="/Scripts/CascadeDropdown.js"></script>
 
 @using (Html.BeginForm())
-{    
-     @Html.AntiForgeryToken()
+{
+    @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
+    <div class="form-horizontal">
         <h4>Shelter</h4>
         <hr />
         @Html.ValidationSummary(true)
@@ -32,17 +32,17 @@
                 @Html.DropDownList("ObjectTypeId", String.Empty)
                 @Html.ValidationMessageFor(model => model.ObjectTypeId)
             </div>
-                <a href="/ObjectType/Create" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">Add new</a>
-                <!-- Modal -->
-                <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content"></div>
-                    </div>
+            <a href="/ObjectType/Create" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">Add new</a>
+            <!-- Modal -->
+            <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content"></div>
                 </div>
-                <!-- /.modal -->
             </div>
+            <!-- /.modal -->
+        </div>
 
-        <div class="form-group">
+<div class="form-group">
             @Html.LabelFor(model => model.Altitude, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Altitude)
@@ -74,7 +74,7 @@
                     new SelectList(ViewBag.RegionId as System.Collections.IEnumerable, "Id", "RegionName"),
                     "Select Region", new { id = "ddlRegions" })
                 @Html.ValidationMessageFor(model => model.RegionId)
-            </div>
+</div>
         </div>
 
         <div class="form-group">
@@ -93,6 +93,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Visited)
                 @Html.ValidationMessageFor(model => model.Visited)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Capacity, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Capacity)
+                @Html.ValidationMessageFor(model => model.Capacity)
             </div>
         </div>
 
@@ -172,6 +180,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-    @section Scripts {
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    }
+}

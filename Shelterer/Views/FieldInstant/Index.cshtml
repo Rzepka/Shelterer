@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Shelterer.Models.History.DoubleHistory>
+﻿@model IEnumerable<Shelterer.Models.FieldInstant>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Record)
+            @Html.DisplayNameFor(model => model.TableId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecordId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataTypeId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShelterId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Author)
@@ -38,13 +44,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Record)
+            @Html.DisplayFor(modelItem => item.TableId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataTypeId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShelterId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Author)

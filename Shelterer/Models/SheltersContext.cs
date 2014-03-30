@@ -13,9 +13,7 @@ namespace Shelterer.Models
         public DbSet<ObjectType> ObjectTypes { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
 
-        public DbSet<History.DoubleHistory> DoubleHistory { get; set; }
-        public DbSet<History.IntHistory> IntHistory { get; set; }
-        public DbSet<History.StringHistory> StringHistory { get; set; }
+        public DbSet<FieldInstant> FieldInstants { get; set; }
 
         public SheltersContext()
             : base("DefaultConnection")
