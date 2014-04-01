@@ -12,6 +12,7 @@ namespace Shelterer.Models
         public DbSet<Region> Regions { get; set; }
         public DbSet<ObjectType> ObjectTypes { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DbSet<FieldInstant> FieldInstants { get; set; }
 

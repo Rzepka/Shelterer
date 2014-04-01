@@ -4,6 +4,30 @@
     ViewBag.Title = "Details";
 }
 
+@section scripts{
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/dropzone.js"></script>
+    <link href="~/Content/dropzone.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#preview").fadeOut(15);
+
+            //window.Dropzone
+
+            $("#refreshButton").click(function () {
+                var imageToLoad = $("#imageId").val();
+                if (imageToLoad.length > 0) {
+                    $("#preview").attr("src", "/Image/Show/" + imageToLoad);
+                    $("#preview").fadeIn();
+                }
+            });
+        });
+
+    </script>
+}
+
 <h2>Details</h2>
 
 <div>
@@ -152,3 +176,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<form action="/Image/Upload" class="dropzone" id="my-awesome-dropzone">
+    <input type="hidden" name="id" value="@Model.Id">
+</form>
+
+<input type="text" name="imageId" id="imageId" />
+<button type="button" id="refreshButton">Update Image</button>
+<img src="/" style="display: none" id="preview" />

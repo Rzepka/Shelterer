@@ -65,9 +65,11 @@ namespace Shelterer.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
             ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName", shelter.ObjectTypeId);
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
+            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
+            ViewBag.MountainRangeId = db.MountainRanges.ToList();
+            ViewBag.RegionId = db.Regions.ToList();
             return View(shelter);
         }
 

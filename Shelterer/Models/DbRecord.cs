@@ -20,7 +20,8 @@ namespace Shelterer.Models
             { "Shelter", 1 },
             { "ObjectType", 2 },
             { "Region", 3 },
-            { "MountainRange", 4 }
+            { "MountainRange", 4 },
+            { "Image", 5 }
         };
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public static readonly Dictionary<string, int> DataTypeIds = new Dictionary<string, int>()

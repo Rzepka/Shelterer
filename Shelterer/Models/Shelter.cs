@@ -14,8 +14,11 @@ namespace Shelterer.Models
         public string Name { get; set; }
         public int? ObjectTypeId { get; set; }
         public virtual ObjectType ObjectType { get; set; }
+        [Range(0, 8850, ErrorMessage = "Proper range <0,8850>")]
         public double? Altitude { get; set; }
+        [Range(-90, 90, ErrorMessage = "Proper range <-90,90>")]
         public double? Latitude { get; set; }
+        [Range(-180, 180, ErrorMessage = "Proper range <-180,180>")]
         public double? Longitude { get; set; }
         [Display(Name = "Region")]
         public int? RegionId { get; set; }
@@ -25,14 +28,19 @@ namespace Shelterer.Models
         public virtual MountainRange MountainRange { get; set; }
         public bool Visited { get; set; }
         public int? Capacity { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
         public string Owner { get; set; }
+        [DataType(DataType.MultilineText),Display()]
         public string Opening { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Location { get; set; }
-        [Display(Name = "Technical Condition")]
+        [DataType(DataType.MultilineText), Display(Name = "Technical Condition")]
         public string TechnicalCondition { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
-        [Display(Name = "Water Access")]
+        [DataType(DataType.MultilineText), Display(Name = "Water Access")]
         public string WaterAccess { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Fireplace { get; set; }
         [Display(Name = "Last Update")]
         public DateTime? LastUpdate { get; set; }
