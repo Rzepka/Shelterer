@@ -9,7 +9,7 @@ namespace Shelterer.Models
 {
     public class ObjectType : DbRecord
     {
-        [Display(Name = "Object Type")]
+        [Required, Display(Name = "Object Type")]
         public string ObjectTypeName { get; set; }
         public virtual ICollection<Shelter> Shelters { get; set; }
 

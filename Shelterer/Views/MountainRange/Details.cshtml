@@ -26,6 +26,29 @@
             @Html.DisplayFor(model => model.MountainRangeName)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shelters)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Shelters.First().Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)</th>
+                </tr>
+                @foreach (var item in Model.Shelters)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>

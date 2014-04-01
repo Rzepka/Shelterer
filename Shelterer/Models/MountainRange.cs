@@ -9,7 +9,7 @@ namespace Shelterer.Models
 {
     public class MountainRange : DbRecord
     {
-        [Display(Name = "Mountain Range")]
+        [Required, Display(Name = "Mountain Range")]
         public string MountainRangeName { get; set; }
         [Display(Name = "Region")]
         public int RegionId { get; set; }

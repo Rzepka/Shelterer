@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Shelterer.Models;
+using PagedList;
+using Shelterer.ViewModels;
 
 namespace Shelterer.Controllers
 {
@@ -16,10 +18,64 @@ namespace Shelterer.Controllers
         private SheltersContext db = new SheltersContext();
 
         // GET: /MountainRange/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page, int? id)
         {
+            var viewModel = new MountainRangeIndexData();
             var mountainranges = db.MountainRanges.Include(m => m.Region);
-            return View(await mountainranges.ToListAsync());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RegionSortParm = sortOrder == "region" ? "region_desc" : "region";
+            
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                mountainranges = mountainranges.Where(m => m.MountainRangeName.ToUpper().Contains(searchString.ToUpper())
+                                       || m.Region.RegionName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    mountainranges = mountainranges.OrderByDescending(m => m.MountainRangeName);
+                    break;
+                case "region":
+                    mountainranges = mountainranges.OrderBy(m => m.Region.RegionName);
+                    break;
+                case "region_desc":
+                    mountainranges = mountainranges.OrderByDescending(m => m.Region.RegionName);
+                    break;
+                default:
+                    mountainranges = mountainranges.OrderBy(m => m.MountainRangeName);
+                    break;
+            }
+            
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            var view = await Task.Run<MountainRangeIndexData>(() =>
+            {
+                if (id != null)
+                {
+                    ViewBag.MountainRangeId = id.Value;
+                    var range = mountainranges.Where(
+                        i => i.Id == id.Value).Single();
+                    viewModel.Shelters = range.Shelters;
+                    ViewBag.MountainRangeName = range.MountainRangeName;
+                }
+                viewModel.MountainRanges = mountainranges.ToPagedList(pageNumber, pageSize);
+                return viewModel;
+            });
+
+            return View(view);
         }
 
         // GET: /MountainRange/Details/5
@@ -49,15 +105,22 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,MountainRangeName,RegionId")] MountainRange mountainrange)
+        public async Task<ActionResult> Create([Bind(Include="MountainRangeName,RegionId")] MountainRange mountainrange)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.MountainRanges.Add(mountainrange);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.MountainRanges.Add(mountainrange);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
             ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", mountainrange.RegionId);
             return View(mountainrange);
         }
@@ -85,22 +148,34 @@ namespace Shelterer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="Id,MountainRangeName,RegionId")] MountainRange mountainrange)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(mountainrange).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(mountainrange).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", mountainrange.RegionId);
             return View(mountainrange);
         }
 
         // GET: /MountainRange/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             MountainRange mountainrange = await db.MountainRanges.FindAsync(id);
             if (mountainrange == null)
@@ -111,13 +186,21 @@ namespace Shelterer.Controllers
         }
 
         // POST: /MountainRange/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]//, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> Delete(int id)//DeleteConfirmed(int id)
         {
-            MountainRange mountainrange = await db.MountainRanges.FindAsync(id);
-            db.MountainRanges.Remove(mountainrange);
-            await db.SaveChangesAsync();
+            try
+            {
+                MountainRange mountainrange = await db.MountainRanges.FindAsync(id);
+                db.MountainRanges.Remove(mountainrange);
+                await db.SaveChangesAsync();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

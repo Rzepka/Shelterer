@@ -10,6 +10,7 @@ namespace Shelterer.Models
 {
     public class Shelter : DbRecord
     {
+        [Required]
         public string Name { get; set; }
         public int? ObjectTypeId { get; set; }
         public virtual ObjectType ObjectType { get; set; }

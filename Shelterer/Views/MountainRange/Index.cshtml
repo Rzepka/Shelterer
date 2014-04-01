@@ -1,27 +1,43 @@
-﻿@model IEnumerable<Shelterer.Models.MountainRange>
+﻿@model Shelterer.ViewModels.MountainRangeIndexData
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mountain Ranges";
 }
 
-<h2>Index</h2>
+<h2>Mountain ranges</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "MountainRange", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Region.RegionName)
+            @Html.ActionLink("Region", "Index", new { sortOrder = ViewBag.RegionSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MountainRangeName)
+            @Html.ActionLink("Mountain Range", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
+        <th>Amount</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model.MountainRanges)
+{
+    string selectedRow = "";
+    if (item.Id == ViewBag.MountainRangeId)
+    {
+        selectedRow = "success";
+    }
+    <tr class="@selectedRow">
         <td>
             @Html.DisplayFor(modelItem => item.Region.RegionName)
         </td>
@@ -29,11 +45,55 @@
             @Html.DisplayFor(modelItem => item.MountainRangeName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @item.Shelters.Count.ToString()
+        </td>
+        <td>
+            @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.MountainRanges.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
 
 </table>
+<br />
+Page @(Model.MountainRanges.PageCount < Model.MountainRanges.PageNumber ? 0 : Model.MountainRanges.PageNumber) of @Model.MountainRanges.PageCount
+
+@Html.PagedListPager(Model.MountainRanges, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ""}))
+
+@if (Model.Shelters != null)
+{
+    <h3>Shelters in @ViewBag.MountainRangeName</h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().Capacity)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Shelters)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+}
