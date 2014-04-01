@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Shelterer.Models;
+using Shelterer.ViewModels;
+using PagedList;
 
 namespace Shelterer.Controllers
 {
@@ -16,9 +18,63 @@ namespace Shelterer.Controllers
         private SheltersContext db = new SheltersContext();
 
         // GET: /ObjectType/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page, int? id)
         {
-            return View(await db.ObjectTypes.ToListAsync());
+            var viewModel = new ObjectTypeIndexData();
+            var objectTypes = db.ObjectTypes.AsQueryable();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                objectTypes = objectTypes.Where(o => o.ObjectTypeName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    objectTypes = objectTypes.OrderByDescending(o => o.ObjectTypeName);
+                    break;
+                //case "region":
+                //    objectTypes = objectTypes.OrderBy(o => o.Region.RegionName);
+                //    break;
+                //case "region_desc":
+                //    objectTypes = objectTypes.OrderByDescending(m => m.Region.RegionName);
+                //    break;
+                default:
+                    objectTypes = objectTypes.OrderBy(o => o.ObjectTypeName);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            var view = await Task.Run<ObjectTypeIndexData>(() =>
+            {
+                if (id != null)
+                {
+                    ViewBag.ObjectTypeId = id.Value;
+                    var type = objectTypes.Where(
+                        i => i.Id == id.Value).Single();
+                    viewModel.Shelters = type.Shelters;
+                    ViewBag.ObjectTypeName = type.ObjectTypeName;
+                }
+                viewModel.ObjectTypes = objectTypes.ToPagedList(pageNumber, pageSize);
+                return viewModel;
+            });
+
+            return View(view);
+            //return View(await db.ObjectTypes.ToListAsync());
         }
 
         // GET: /ObjectType/Details/5
@@ -49,19 +105,26 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,ObjectTypeName")] ObjectType objecttype)
+        public async Task<ActionResult> Create([Bind(Include="ObjectTypeName")] ObjectType objecttype)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.ObjectTypes.Add(objecttype);
-                await db.SaveChangesAsync();
-                if (Request.UrlReferrer.PathAndQuery != "/ObjectType/Create")
+                if (ModelState.IsValid)
                 {
-                    return Redirect(Request.UrlReferrer.PathAndQuery);
+                    db.ObjectTypes.Add(objecttype);
+                    await db.SaveChangesAsync();
+                    if (Request.UrlReferrer.PathAndQuery != "/ObjectType/Create")
+                    {
+                        return Redirect(Request.UrlReferrer.PathAndQuery);
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
-
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
             return View(objecttype);
         }
 
@@ -87,21 +150,33 @@ namespace Shelterer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="Id,ObjectTypeName")] ObjectType objecttype)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(objecttype).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(objecttype).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(objecttype);
         }
 
         // GET: /ObjectType/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             ObjectType objecttype = await db.ObjectTypes.FindAsync(id);
             if (objecttype == null)
@@ -116,9 +191,17 @@ namespace Shelterer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ObjectType objecttype = await db.ObjectTypes.FindAsync(id);
-            db.ObjectTypes.Remove(objecttype);
-            await db.SaveChangesAsync();
+            try
+            {
+                ObjectType objecttype = await db.ObjectTypes.FindAsync(id);
+                db.ObjectTypes.Remove(objecttype);
+                await db.SaveChangesAsync();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

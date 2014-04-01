@@ -17,7 +17,13 @@
         <dd>
             @Html.DisplayFor(model => model.ObjectTypeName)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Shelters)
+        </dt>
+        <dd>
+            @{ViewBag.AdditionalInfo = "location";}
+            @Html.Partial("~/Views/Shelter/PartialIndex.cshtml", Model.Shelters)
+        </dd>
     </dl>
 </div>
 <p>

@@ -191,6 +191,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MountainRangeIndexData.cs" />
+    <Compile Include="ViewModels\ObjectTypeIndexData.cs" />
+    <Compile Include="ViewModels\RegionIndexData.cs" />
     <Compile Include="ViewModels\SuccessModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +272,7 @@
     <Content Include="Views\FieldInstant\Edit.cshtml" />
     <Content Include="Views\FieldInstant\Index.cshtml" />
     <Content Include="Views\ObjectType\PartialCreate.cshtml" />
+    <Content Include="Views\Shelter\PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
