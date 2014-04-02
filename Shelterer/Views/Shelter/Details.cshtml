@@ -42,7 +42,9 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.MountainRange.MountainRangeName).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "MountainRangeId" },
+                new { data_toggle = "modal", data_target = "#remoteModal1", title = "History" })
         </dt>
 
         <dd>
@@ -50,7 +52,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "ObjectTypeId" },
+                new { data_toggle = "modal", data_target = "#remoteModal2", title = "History" })
         </dt>
 
         <dd>
@@ -58,7 +62,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Region.RegionName)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Region.RegionName).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "RegionId" },
+                new { data_toggle = "modal", data_target = "#remoteModal3", title = "History" })
         </dt>
 
         <dd>
@@ -66,7 +72,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Name).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Name" },
+                new { data_toggle = "modal", data_target = "#remoteModal4", title = "History" })
         </dt>
 
         <dd>
@@ -74,7 +82,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Altitude)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Altitude).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Altitude" },
+                new { data_toggle = "modal", data_target = "#remoteModal5", title = "History" })
         </dt>
 
         <dd>
@@ -82,7 +92,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Latitude)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Latitude).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Latitude" },
+                new { data_toggle = "modal", data_target = "#remoteModal6", title = "History" })
         </dt>
 
         <dd>
@@ -90,7 +102,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Longitude)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Longitude).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Longitude" },
+                new { data_toggle = "modal", data_target = "#remoteModal7", title = "History" })
         </dt>
 
         <dd>
@@ -106,7 +120,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Capacity)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Capacity).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Capacity" },
+                new { data_toggle = "modal", data_target = "#remoteModal8", title = "History" })
         </dt>
 
         <dd>
@@ -114,7 +130,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Owner)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Owner).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Owner" },
+                new { data_toggle = "modal", data_target = "#remoteModal9", title = "History" })
         </dt>
 
         <dd>
@@ -122,7 +140,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Opening)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Opening).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Opening" },
+                new { data_toggle = "modal", data_target = "#remoteModal10", title = "History" })
         </dt>
 
         <dd>
@@ -130,7 +150,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Location).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Location" },
+                new { data_toggle = "modal", data_target = "#remoteModal11", title = "History" })
         </dt>
 
         <dd>
@@ -138,7 +160,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TechnicalCondition)
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.TechnicalCondition).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "TechnicalCondition" },
+                new { data_toggle = "modal", data_target = "#remoteModal12", title = "History" })
         </dt>
 
         <dd>
@@ -146,7 +170,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Remarks).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Remarks" },
+                new { data_toggle = "modal", data_target = "#remoteModal13", title = "History" })
         </dt>
 
         <dd>
@@ -154,7 +180,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WaterAccess)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.WaterAccess).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "WaterAccess" },
+                new { data_toggle = "modal", data_target = "#remoteModal14", title = "History" })
         </dt>
 
         <dd>
@@ -162,7 +190,9 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fireplace)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Fireplace).ToString(), "Index", "FieldInstant",
+                new { table = "Shelter", recordId = Model.Id, field = "Fireplace" },
+                new { data_toggle = "modal", data_target = "#remoteModal15", title = "History" })
         </dt>
 
         <dd>
@@ -209,3 +239,82 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<div>
+    <div class="modal fade" id="remoteModal1" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal2" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal3" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal4" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal5" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal6" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal7" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal8" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal9" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal10" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal11" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal12" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal13" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal14" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="remoteModal15" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+</div>

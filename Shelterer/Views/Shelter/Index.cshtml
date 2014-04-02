@@ -30,15 +30,14 @@
             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Shelters.First().Region.RegionName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Shelters.First().MountainRange.MountainRangeName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().Region.RegionName)
-        </th>
-
         <th>
             @Html.DisplayNameFor(model => model.Shelters.First().Capacity)
         </th>
@@ -57,16 +56,16 @@
     }
     <tr class="@selectedRow">
         <td>
-            @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Region.RegionName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Capacity)

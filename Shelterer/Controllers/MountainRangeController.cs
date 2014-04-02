@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using Shelterer.Models;
 using PagedList;
 using Shelterer.ViewModels;
+using SheltererExtensionMethods;
 
 namespace Shelterer.Controllers
 {
+    [Authorize]
     public class MountainRangeController : Controller
     {
         private SheltersContext db = new SheltersContext();
@@ -115,6 +117,7 @@ namespace Shelterer.Controllers
                 {
                     db.MountainRanges.Add(mountainrange);
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(mountainrange, User.Identity.Name, "New mountain range added");
                     if (Request.UrlReferrer.PathAndQuery != "/MountainRange/Create")
                     {
                         return Redirect(Request.UrlReferrer.PathAndQuery);
@@ -160,6 +163,7 @@ namespace Shelterer.Controllers
                 {
                     db.Entry(mountainrange).State = EntityState.Modified;
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(mountainrange, User.Identity.Name, "Mountain range modified");
                     return RedirectToAction("Index");
                 }
             }

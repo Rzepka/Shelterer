@@ -11,7 +11,9 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Region.RegionName)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Region.RegionName).ToString(), "Index", "FieldInstant",
+                new { table = "MountainRange", recordId = Model.Id, field = "RegionId" },
+                new { data_toggle = "modal", data_target = "#remoteModal1", title = "History" })
         </dt>
 
         <dd>
@@ -19,7 +21,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MountainRangeName)
+            @*@Html.DisplayNameFor(model => model.MountainRangeName)*@
+            @Html.ActionLink(Html.DisplayNameFor(model => model.MountainRangeName).ToString(), "Index", "FieldInstant",
+            new { table = "MountainRange", recordId = Model.Id, field = "MountainRangeName" },
+            new { data_toggle = "modal", data_target = "#remoteModal2", title = "History" })
         </dt>
 
         <dd>
@@ -40,3 +45,16 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<!-- Modal -->
+<div class="modal fade" id="remoteModal1" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<div class="modal fade" id="remoteModal2" tabindex="0" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- /.modal -->

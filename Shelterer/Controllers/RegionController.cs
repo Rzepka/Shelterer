@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using Shelterer.Models;
 using PagedList;
 using Shelterer.ViewModels;
+using SheltererExtensionMethods;
 
 namespace Shelterer.Controllers
 {
+    [Authorize]
     public class RegionController : Controller
     {
         private SheltersContext db = new SheltersContext();
@@ -114,6 +116,7 @@ namespace Shelterer.Controllers
                 {
                     db.Regions.Add(region);
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(region, User.Identity.Name, "New region added");
                     if (Request.UrlReferrer.PathAndQuery != "/Region/Create")
                     {
                         return Redirect(Request.UrlReferrer.PathAndQuery);
@@ -157,6 +160,7 @@ namespace Shelterer.Controllers
                 {
                     db.Entry(region).State = EntityState.Modified;
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(region, User.Identity.Name, "Region modified");
                     return RedirectToAction("Index");
                 }
             }

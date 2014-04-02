@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using Shelterer.Models;
 using Shelterer.ViewModels;
 using PagedList;
+using SheltererExtensionMethods;
 
 namespace Shelterer.Controllers
 {
+    [Authorize]
     public class ObjectTypeController : Controller
     {
         private SheltersContext db = new SheltersContext();
@@ -113,6 +115,7 @@ namespace Shelterer.Controllers
                 {
                     db.ObjectTypes.Add(objecttype);
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(objecttype, User.Identity.Name, "New object type added");
                     if (Request.UrlReferrer.PathAndQuery != "/ObjectType/Create")
                     {
                         return Redirect(Request.UrlReferrer.PathAndQuery);
@@ -156,6 +159,7 @@ namespace Shelterer.Controllers
                 {
                     db.Entry(objecttype).State = EntityState.Modified;
                     await db.SaveChangesAsync();
+                    await db.SaveRecord(objecttype, User.Identity.Name, "Object type modified");
                     return RedirectToAction("Index");
                 }
             }

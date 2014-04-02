@@ -17,12 +17,12 @@ namespace Shelterer.Models
         public virtual Region Region { get; set; }
         public virtual ICollection<Shelter> Shelters { get; set; }
 
-        public override Dictionary<string, int> GetFieldIds()
-        {
-            return FieldIds;
-        }
+        //public override Dictionary<string, int> GetFieldIds()
+        //{
+        //    return FieldIds;
+        //}
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public readonly Dictionary<string, int> FieldIds = new Dictionary<string, int>()
+        public static readonly Dictionary<string, int> FieldIds = new Dictionary<string, int>()
         {
             { "MountainRangeName", 0 },
             { "RegionId", 1 },

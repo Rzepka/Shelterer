@@ -45,12 +45,12 @@ namespace Shelterer.Models
         [Display(Name = "Last Update")]
         public DateTime? LastUpdate { get; set; }
 
-        public override Dictionary<string, int> GetFieldIds()
-        {
-            return FieldIds;
-        }
+        //public override Dictionary<string, int> GetFieldIds()
+        //{
+        //    return FieldIds;
+        //}
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public readonly Dictionary<string, int> FieldIds = new Dictionary<string, int>()
+        public static readonly Dictionary<string, int> FieldIds = new Dictionary<string, int>()
         {
             { "Name", 0 },
             { "ObjectTypeId", 1 },

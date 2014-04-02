@@ -190,6 +190,7 @@
     <Compile Include="Models\SheltersInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FieldInstantIndexData.cs" />
     <Compile Include="ViewModels\MountainRangeIndexData.cs" />
     <Compile Include="ViewModels\ObjectTypeIndexData.cs" />
     <Compile Include="ViewModels\RegionIndexData.cs" />
@@ -200,6 +201,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dropzone.css" />
+    <Content Include="Content\ModalStyle.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\spritemap%402x.png" />
     <Content Include="Content\spritemap.png" />
@@ -211,6 +213,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone.js" />
+    <Content Include="Scripts\EmptyModal.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -278,6 +281,7 @@
     <Content Include="Views\MountainRange\PartialIndex.cshtml" />
     <Content Include="Views\Region\PartialCreate.cshtml" />
     <Content Include="Views\MountainRange\PartialCreate.cshtml" />
+    <Content Include="Views\FieldInstant\PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

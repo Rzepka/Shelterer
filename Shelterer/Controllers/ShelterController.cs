@@ -14,6 +14,7 @@ using PagedList;
 
 namespace Shelterer.Controllers
 {
+    [Authorize]
     public class ShelterController : Controller
     {
         private SheltersContext db = new SheltersContext();
@@ -111,7 +112,7 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Capacity,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
+        public async Task<ActionResult> Create([Bind(Include="Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Capacity,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace")] Shelter shelter)
         {
             try
             {
@@ -120,7 +121,7 @@ namespace Shelterer.Controllers
                     db.Shelters.Add(shelter);
                     await db.SaveChangesAsync();
                     //TODO: author and message
-                    await db.SaveRecord(shelter, "zenek", "elo");
+                    await db.SaveRecord(shelter, User.Identity.Name, "New shelter added");
                     return RedirectToAction("Index");
                 }
             }
@@ -162,7 +163,7 @@ namespace Shelterer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Capacity,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace,LastUpdate")] Shelter shelter)
+        public async Task<ActionResult> Edit([Bind(Include="Id,Name,ObjectTypeId,Altitude,Latitude,Longitude,RegionId,MountainRangeId,Visited,Capacity,Owner,Opening,Location,TechnicalCondition,Remarks,WaterAccess,Fireplace")] Shelter shelter)
         {
             try
             {
@@ -171,7 +172,7 @@ namespace Shelterer.Controllers
                     db.Entry(shelter).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     //TODO: author and message
-                    await db.SaveRecord(shelter, "mietek", "siemka");
+                    await db.SaveRecord(shelter, User.Identity.Name, "Shelter modified");
                     return RedirectToAction("Index");
                 }
             }

@@ -7,9 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using SheltererExtensionMethods;
 
 namespace Shelterer.Controllers
 {
+    [Authorize]
     public class ImageController : Controller
     {
 
@@ -67,6 +69,7 @@ namespace Shelterer.Controllers
                 {
                     db.Images.Add(image);
                     handled = (await db.SaveChangesAsync()> 0);
+                    await db.SaveRecord(image, User.Identity.Name, "Image added");
                 }
             }
             catch (Exception ex)

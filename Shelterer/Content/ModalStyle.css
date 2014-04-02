@@ -1,0 +1,20 @@
+﻿body {
+}
+    .modal {
+        top: 20%;
+        left: 20%;
+        height: 60%;
+        width: 60%;
+        background-color: white;
+        overflow: visible;
+        bottom: 20%;
+        right: 20%;
+        min-height: 400px;
+        min-width: 700px;
+    }
+
+    .modal .modal-body {
+        max-height: 420px;
+        overflow-y: auto;
+        background-color:white;
+    }
