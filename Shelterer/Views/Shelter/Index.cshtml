@@ -1,10 +1,25 @@
-﻿@model IEnumerable<Shelterer.Models.Shelter>
+﻿@model Shelterer.ViewModels.ShelterIndexData
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/thumbnail-gallery.css" rel="stylesheet">
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shelters";
 }
 
-<h2>Index</h2>
+<h2>Shelters</h2>
+@using (Html.BeginForm("Index", "Shelter", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+@using (Html.BeginForm("Index", "Shelter", FormMethod.Get))
+{
+    @Html.TextBox("currentFilter", "", new { type = "hidden" })
+    <input type="submit" value="Clear" class="btn btn-default" />
+}
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,61 +27,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+            @Html.DisplayNameFor(model => model.Shelters.First().MountainRange.MountainRangeName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Region.RegionName)
+            @Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Shelters.First().Region.RegionName)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Altitude)
-        </th>
+
         <th>
-            @Html.DisplayNameFor(model => model.Latitude)
+            @Html.DisplayNameFor(model => model.Shelters.First().Capacity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visited)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Owner)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Opening)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TechnicalCondition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WaterAccess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fireplace)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdate)
+            @Html.DisplayNameFor(model => model.Shelters.First().LastUpdate)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model.Shelters)
+{
+    string selectedRow = "";
+    if (item.Id == ViewBag.ShelterId)
+    {
+        selectedRow = "success";
+    }
+    <tr class="@selectedRow">
         <td>
             @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
         </td>
@@ -79,46 +68,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Altitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Visited)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Capacity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Owner)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Opening)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TechnicalCondition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WaterAccess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fireplace)
-        </td>*@
-        <td>
             @Html.DisplayFor(modelItem => item.LastUpdate)
         </td>
         <td>
+            @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.Shelters.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
@@ -127,3 +84,38 @@
 }
 
 </table>
+<br />
+Page @(Model.Shelters.PageCount < Model.Shelters.PageNumber ? 0 : Model.Shelters.PageNumber) of @Model.Shelters.PageCount
+
+@Html.PagedListPager(Model.Shelters, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ViewBag.ObjectTypeId }))
+
+@if (Model.Images != null)
+{
+    using (Html.BeginForm("Index", "Shelter", new { id = "" }, FormMethod.Get))
+    {
+        <input type="hidden" name="page" value="@Model.Shelters.PageNumber">
+        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort">
+        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+        <input type="submit" value="Hide" class="btn btn-default" />
+    }
+    <h3>Photos form @ViewBag.ShelterName</h3>
+
+    <div class="container" id="gallery">
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+        @foreach (var image in Model.Images)
+        {
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="/Image/Show/@image.Id">
+                    <img class="img-responsive" src="/Image/Show/@image.Id">
+                </a>
+            </div>
+        }
+    </div>
+    <hr>
+</div>
+<!-- /.container -->
+    
+}

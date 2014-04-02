@@ -8,21 +8,28 @@
     <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/dropzone.js"></script>
     <link href="~/Content/dropzone.css" rel="stylesheet" />
+    <link href="~/Content/thumbnail-gallery.css" rel="stylesheet">
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $("#preview").fadeOut(15);
 
-            //window.Dropzone
-
-            $("#refreshButton").click(function () {
-                var imageToLoad = $("#imageId").val();
-                if (imageToLoad.length > 0) {
-                    $("#preview").attr("src", "/Image/Show/" + imageToLoad);
-                    $("#preview").fadeIn();
-                }
+            $("#add_btn").click(function () {
+                $("#gallery").fadeOut();
+                $("#my-awesome-dropzone").fadeIn();
+                $("#add_btn").text("Finish");
+                $("#add_btn").click(function () {
+                    //location.reload();
+                    $.ajax({
+                        url: "",
+                        context: document.body,
+                        success: function (s, x) {
+                            $(this).html(s);
+                        }
+                    });
+                });
             });
+
         });
 
     </script>
@@ -172,15 +179,33 @@
 
     </dl>
 </div>
+
+
+<p><a class="btn btn-default" id="add_btn">Add new image</a></p>
+
+<div class="container" id="gallery">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Thumbnail Gallery</h1>
+        </div>
+        @foreach (var image in Model.Images)
+        {
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="/Image/Show/@image.Id">
+                    <img class="img-responsive" src="/Image/Show/@image.Id">
+                </a>
+            </div>
+        }
+    </div>
+    <hr>
+</div>
+<!-- /.container -->
+
+<form action="/Image/Upload" class="dropzone" id="my-awesome-dropzone"   style="display: none">
+    <input type="hidden" name="id" value="@Model.Id">
+</form>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
-<form action="/Image/Upload" class="dropzone" id="my-awesome-dropzone">
-    <input type="hidden" name="id" value="@Model.Id">
-</form>
-
-<input type="text" name="imageId" id="imageId" />
-<button type="button" id="refreshButton">Update Image</button>
-<img src="/" style="display: none" id="preview" />

@@ -18,6 +18,11 @@
         <input type="submit" value="Search" class="btn btn-default" />
     </p>
 }
+@using (Html.BeginForm("Index", "ObjectType", FormMethod.Get))
+{
+    @Html.TextBox("currentFilter", "", new { type = "hidden" })
+    <input type="submit" value="Clear" class="btn btn-default" />
+}
 <table class="table">
     <tr>
         <th>
@@ -61,10 +66,17 @@
 Page @(Model.MountainRanges.PageCount < Model.MountainRanges.PageNumber ? 0 : Model.MountainRanges.PageNumber) of @Model.MountainRanges.PageCount
 
 @Html.PagedListPager(Model.MountainRanges, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ""}))
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ViewBag.MountainRangeId }))
 
 @if (Model.Shelters != null)
 {
+    using (Html.BeginForm("Index", "MountainRange", new { id = "" }, FormMethod.Get))
+    {
+        <input type="hidden" name="page" value="@Model.MountainRanges.PageNumber">
+        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort">
+        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+        <input type="submit" value="Hide" class="btn btn-default" />
+    }
     <h3>Shelters in @ViewBag.MountainRangeName</h3>
     ViewBag.AdditionalInfo = "type";
     @Html.Partial("~/Views/Shelter/PartialIndex.cshtml", Model.Shelters)    

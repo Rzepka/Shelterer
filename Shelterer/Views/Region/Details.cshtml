@@ -17,7 +17,19 @@
         <dd>
             @Html.DisplayFor(model => model.RegionName)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.MountainRanges)
+        </dt>
+        <dd>
+            @Html.Partial("~/Views/MountainRange/PartialIndex.cshtml", Model.MountainRanges)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shelters)
+        </dt>
+        <dd>
+            @{ViewBag.AdditionalInfo = "type";}
+            @Html.Partial("~/Views/Shelter/PartialIndex.cshtml", Model.Shelters.OrderByDescending(s => s.LastUpdate).Take(10))
+        </dd>
     </dl>
 </div>
 <p>

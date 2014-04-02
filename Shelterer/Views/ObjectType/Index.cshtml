@@ -11,18 +11,36 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "ObjectType", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+@using (Html.BeginForm("Index", "ObjectType", FormMethod.Get))
+{
+        @Html.TextBox("currentFilter", "", new { type = "hidden" })
+        <input type="submit" value="Clear" class="btn btn-default" />
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+            @Html.ActionLink("Object types", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>Amount</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.ObjectType)
+@foreach (var item in Model.ObjectTypes)
 {
-    <tr>
+    string selectedRow = "";
+    if (item.Id == ViewBag.ObjectTypeId)
+    {
+        selectedRow = "success";
+    }
+    <tr class="@selectedRow">
         <td>
             @Html.DisplayFor(modelItem => item.ObjectTypeName)
         </td>
@@ -30,6 +48,7 @@
             @item.Shelters.Count.ToString()
         </td>
         <td>
+            @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.ObjectTypes.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
@@ -39,13 +58,20 @@
 
 </table>
 <br />
-Page @(Model.ObjectType.PageCount < Model.ObjectType.PageNumber ? 0 : Model.ObjectType.PageNumber) of @Model.ObjectType.PageCount
+Page @(Model.ObjectTypes.PageCount < Model.ObjectTypes.PageNumber ? 0 : Model.ObjectTypes.PageNumber) of @Model.ObjectTypes.PageCount
 
-@Html.PagedListPager(Model.ObjectType, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = "" }))
+@Html.PagedListPager(Model.ObjectTypes, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ViewBag.ObjectTypeId }))
 
 @if (Model.Shelters != null)
 {
+    using (Html.BeginForm("Index", "ObjectType", new { id = ""}, FormMethod.Get))
+    {
+        <input type="hidden" name="page" value="@Model.ObjectTypes.PageNumber">
+        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort">
+        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+        <input type="submit" value="Hide" class="btn btn-default" />
+    }
     <h3>@ViewBag.ObjectTypeName type shelters</h3>
     ViewBag.AdditionalInfo = "location";
     @Html.Partial("~/Views/Shelter/PartialIndex.cshtml", Model.Shelters)

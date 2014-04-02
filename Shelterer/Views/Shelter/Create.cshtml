@@ -31,15 +31,8 @@
             <div class="col-md-10">
                 @Html.DropDownList("ObjectTypeId", String.Empty)
                 @Html.ValidationMessageFor(model => model.ObjectTypeId)
+                <a href="/ObjectType/Create" data-toggle="modal" data-target="#remoteModalObjectType" class="btn btn-default">Add new</a>
             </div>
-            <a href="/ObjectType/Create" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">Add new</a>
-            <!-- Modal -->
-            <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content"></div>
-                </div>
-            </div>
-            <!-- /.modal -->
         </div>
 
 <div class="form-group">
@@ -74,7 +67,8 @@
                     new SelectList(ViewBag.RegionId as System.Collections.IEnumerable, "Id", "RegionName"),
                     "Select Region", new { id = "ddlRegions" })
                 @Html.ValidationMessageFor(model => model.RegionId)
-</div>
+                <a href="/Region/Create" data-toggle="modal" data-target="#remoteModalRegion" class="btn btn-default">Add new</a>
+            </div>
         </div>
 
         <div class="form-group">
@@ -85,6 +79,7 @@
                     new SelectList(ViewBag.MountainRangeId as System.Collections.IEnumerable, "Id", "MountainRangeName"),
                     "Select Mountain Range", new { id = "ddlRanges" })
                 @Html.ValidationMessageFor(model => model.MountainRangeId)
+                <a href="/MountainRange/Create" data-toggle="modal" data-target="#remoteModalMountainRange" class="btn btn-default">Add new</a>
             </div>
         </div>
 
@@ -179,6 +174,28 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="remoteModalObjectType" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Modal -->
+<div class="modal fade" id="remoteModalRegion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Modal -->
+<div class="modal fade" id="remoteModalMountainRange" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- /.modal -->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

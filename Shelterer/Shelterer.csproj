@@ -193,6 +193,7 @@
     <Compile Include="ViewModels\MountainRangeIndexData.cs" />
     <Compile Include="ViewModels\ObjectTypeIndexData.cs" />
     <Compile Include="ViewModels\RegionIndexData.cs" />
+    <Compile Include="ViewModels\ShelterIndexData.cs" />
     <Compile Include="ViewModels\SuccessModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\spritemap%402x.png" />
     <Content Include="Content\spritemap.png" />
+    <Content Include="Content\thumbnail-gallery.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -273,6 +275,9 @@
     <Content Include="Views\FieldInstant\Index.cshtml" />
     <Content Include="Views\ObjectType\PartialCreate.cshtml" />
     <Content Include="Views\Shelter\PartialIndex.cshtml" />
+    <Content Include="Views\MountainRange\PartialIndex.cshtml" />
+    <Content Include="Views\Region\PartialCreate.cshtml" />
+    <Content Include="Views\MountainRange\PartialCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

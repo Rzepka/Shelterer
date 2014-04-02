@@ -66,7 +66,7 @@ namespace Shelterer.Controllers
                 if (id != null)
                 {
                     ViewBag.MountainRangeId = id.Value;
-                    var range = mountainranges.Where(
+                    var range = db.MountainRanges.Where(
                         i => i.Id == id.Value).Single();
                     viewModel.Shelters = range.Shelters;
                     ViewBag.MountainRangeName = range.MountainRangeName;
@@ -97,6 +97,8 @@ namespace Shelterer.Controllers
         public ActionResult Create()
         {
             ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName");
+            if (Request.IsAjaxRequest())
+                return PartialView("PartialCreate");
             return View();
         }
 
@@ -113,6 +115,10 @@ namespace Shelterer.Controllers
                 {
                     db.MountainRanges.Add(mountainrange);
                     await db.SaveChangesAsync();
+                    if (Request.UrlReferrer.PathAndQuery != "/MountainRange/Create")
+                    {
+                        return Redirect(Request.UrlReferrer.PathAndQuery);
+                    }
                     return RedirectToAction("Index");
                 }
             }

@@ -64,7 +64,7 @@ namespace Shelterer.Controllers
                 if (id != null)
                 {
                     ViewBag.ObjectTypeId = id.Value;
-                    var type = objectTypes.Where(
+                    var type = db.ObjectTypes.Where(
                         i => i.Id == id.Value).Single();
                     viewModel.Shelters = type.Shelters;
                     ViewBag.ObjectTypeName = type.ObjectTypeName;
