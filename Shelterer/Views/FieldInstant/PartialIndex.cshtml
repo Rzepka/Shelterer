@@ -1,0 +1,54 @@
+﻿@model Shelterer.ViewModels.FieldInstantIndexData
+<link href="~/Content/ModalStyle.css" rel="stylesheet" />
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="mySmallModalLabel"> Requested history </h4>
+</div>
+<div class="modal-body">
+    <table class="table" id="partial">
+            <tr>
+                 <th>
+                    Value
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Message
+                </th>
+                <th>
+                    StartDate
+                </th>
+                <th>
+                    EndDate
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.FieldInstants)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Restore", "Restore", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
