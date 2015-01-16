@@ -9,6 +9,9 @@
     <script src="~/Scripts/dropzone.js"></script>
     <link href="~/Content/dropzone.css" rel="stylesheet" />
     <link href="~/Content/thumbnail-gallery.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="/Scripts/GMaps.js"></script>
 
     <script type="text/javascript">
 
@@ -97,7 +100,7 @@
                 new { data_toggle = "modal", data_target = "#remoteModal6", title = "History" })
         </dt>
 
-        <dd>
+        <dd id="latitudeData">
             @Html.DisplayFor(model => model.Latitude)
         </dd>
 
@@ -107,7 +110,7 @@
                 new { data_toggle = "modal", data_target = "#remoteModal7", title = "History" })
         </dt>
 
-        <dd>
+        <dd id="longitudeData">
             @Html.DisplayFor(model => model.Longitude)
         </dd>
 
@@ -234,6 +237,8 @@
 <form action="/Image/Upload" class="dropzone" id="my-awesome-dropzone"   style="display: none">
     <input type="hidden" name="id" value="@Model.Id">
 </form>
+
+<div id="map-container" style="width: 500px; height: 500px;"></div>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

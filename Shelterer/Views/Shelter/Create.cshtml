@@ -6,9 +6,6 @@
 
 <h2>Create</h2>
 
-<script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/Scripts/CascadeDropdown.js"></script>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -62,10 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RegionId, "Region", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("RegionId", String.Empty)*@
-                @Html.DropDownListFor(model => model.RegionId,
-                    new SelectList(ViewBag.RegionId as System.Collections.IEnumerable, "Id", "RegionName"),
-                    "Select Region", new { id = "ddlRegions" })
+                @Html.DropDownList("RegionId", null, "Select Region", new { id = "ddlRegions" })
                 @Html.ValidationMessageFor(model => model.RegionId)
                 <a href="/Region/Create" data-toggle="modal" data-target="#remoteModalRegion" class="btn btn-default">Add new</a>
             </div>
@@ -74,10 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MountainRangeId, "Mountain Range", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("MountainRangeId", String.Empty)*@
-                @Html.DropDownListFor(model => model.MountainRangeId,
-                    new SelectList(ViewBag.MountainRangeId as System.Collections.IEnumerable, "Id", "MountainRangeName"),
-                    "Select Mountain Range", new { id = "ddlRanges" })
+                @Html.DropDownList("MountainRangeId", null, "Select Region", new { id = "ddlRanges" })
                 @Html.ValidationMessageFor(model => model.MountainRangeId)
                 <a href="/MountainRange/Create" data-toggle="modal" data-target="#remoteModalMountainRange" class="btn btn-default">Add new</a>
             </div>
@@ -163,6 +154,8 @@
     </div>
 }
 
+<div class="editable-map" id="map-container" style="width: 500px; height: 500px;"></div>
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -191,4 +184,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/CascadeDropdown.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="/Scripts/GMaps.js"></script>
 }
