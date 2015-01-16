@@ -24,35 +24,37 @@
     <input type="submit" value="Clear" class="btn btn-default" />
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Regions", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Regions", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model.Regions)
-{
-    string selectedRow = "";
-    if (item.Id == ViewBag.RegionId)
-    {
-        selectedRow = "success";
-    }
-    <tr class="@selectedRow">
-        <td>
-            @Html.DisplayFor(modelItem => item.RegionName)
-        </td>
-        <td>
-            @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.Regions.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model.Regions)
+        {
+            string selectedRow = "";
+            if (item.Id == ViewBag.RegionId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionName)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.Regions.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
 <br />
 Page @(Model.Regions.PageCount < Model.Regions.PageNumber ? 0 : Model.Regions.PageNumber) of @Model.Regions.PageCount
 

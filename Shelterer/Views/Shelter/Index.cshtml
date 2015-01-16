@@ -24,97 +24,99 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().Region.RegionName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().MountainRange.MountainRangeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shelters.First().LastUpdate)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().Region.RegionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().MountainRange.MountainRangeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().ObjectType.ObjectTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shelters.First().LastUpdate)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model.Shelters)
-{
-    string selectedRow = "";
-    if (item.Id == ViewBag.ShelterId)
-    {
-        selectedRow = "success";
-    }
-    <tr class="@selectedRow">
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region.RegionName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.Shelters.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model.Shelters)
+        {
+            string selectedRow = "";
+            if (item.Id == ViewBag.ShelterId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region.RegionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdate)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.Id, page = Model.Shelters.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
 <br />
-Page @(Model.Shelters.PageCount < Model.Shelters.PageNumber ? 0 : Model.Shelters.PageNumber) of @Model.Shelters.PageCount
+    Page @(Model.Shelters.PageCount < Model.Shelters.PageNumber ? 0 : Model.Shelters.PageNumber) of @Model.Shelters.PageCount
 
-@Html.PagedListPager(Model.Shelters, page => Url.Action("Index",
+    @Html.PagedListPager(Model.Shelters, page => Url.Action("Index",
                 new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, id = ViewBag.ObjectTypeId }))
 
-@if (Model.Images != null)
-{
-    using (Html.BeginForm("Index", "Shelter", new { id = "" }, FormMethod.Get))
+    @if (Model.Images != null)
     {
-        <input type="hidden" name="page" value="@Model.Shelters.PageNumber">
-        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort">
-        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
-        <input type="submit" value="Hide" class="btn btn-default" />
-    }
-    <h3>Photos form @ViewBag.ShelterName</h3>
-
-    <div class="container" id="gallery">
-    <div class="row">
-        <div class="col-lg-12">
-        </div>
-        @foreach (var image in Model.Images)
+        using (Html.BeginForm("Index", "Shelter", new { id = "" }, FormMethod.Get))
         {
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="/Image/Show/@image.Id">
-                    <img class="img-responsive" src="/Image/Show/@image.Id">
-                </a>
-            </div>
+            <input type="hidden" name="page" value="@Model.Shelters.PageNumber">
+            <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort">
+            <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+            <input type="submit" value="Hide" class="btn btn-default" />
         }
-    </div>
-    <hr>
-</div>
-<!-- /.container -->
-    
-}
+        <h3>Photos form @ViewBag.ShelterName</h3>
+
+        <div class="container" id="gallery">
+            <div class="row">
+                <div class="col-lg-12">
+                </div>
+                @foreach (var image in Model.Images)
+                {
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        <a class="thumbnail" href="/Image/Show/@image.Id">
+                            <img class="img-responsive" src="/Image/Show/@image.Id">
+                        </a>
+                    </div>
+                }
+            </div>
+            <hr>
+        </div>
+        <!-- /.container -->
+
+    }

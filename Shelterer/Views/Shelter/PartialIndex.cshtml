@@ -3,67 +3,70 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        @if(ViewBag.AdditionalInfo == "location" )
-        {
-        <th>
-            @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region.RegionName)
-        </th>
-        }
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        @if(ViewBag.AdditionalInfo == "type" )
-        {
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            @if (ViewBag.AdditionalInfo == "location")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.MountainRange.MountainRangeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Region.RegionName)
+                </th>
+            }
             <th>
-                @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
-        }
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdate)
-        </th>
-        <th></th>
-    </tr>
+            @if (ViewBag.AdditionalInfo == "type")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.ObjectType.ObjectTypeName)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdate)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        @if(ViewBag.AdditionalInfo == "location" )
+        @foreach (var item in Model)
         {
-        <td>
-            @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
-        </td>        
-        <td>
-            @Html.DisplayFor(modelItem => item.Region.RegionName)
-        </td>
+            <tr>
+                @if (ViewBag.AdditionalInfo == "location")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MountainRange.MountainRangeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region.RegionName)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                @if (ViewBag.AdditionalInfo == "type")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Shelter", new { id = item.Id }, null) |
+                    @Html.ActionLink("Details", "Details", "Shelter", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Shelter", new { id = item.Id }, null)
+                </td>
+            </tr>
         }
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        @if(ViewBag.AdditionalInfo == "type" )
-        {
-        <td>
-            @Html.DisplayFor(modelItem => item.ObjectType.ObjectTypeName)
-        </td>
-        }
-        <td>
-            @Html.DisplayFor(modelItem => item.Capacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", "Shelter", new { id=item.Id }, null) |
-            @Html.ActionLink("Details", "Details", "Shelter", new { id = item.Id }, null) |
-            @Html.ActionLink("Delete", "Delete", "Shelter", new { id = item.Id }, null)
-        </td>
-    </tr>
-}
 
-</table>
+    </table>
+</div>
