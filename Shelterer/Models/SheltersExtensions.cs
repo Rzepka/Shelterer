@@ -11,6 +11,119 @@ namespace SheltererExtensionMethods
 {
     public static class SheltersExtensions
     {
+        //non async for initialization
+        public static void SaveRecordSync(this SheltersContext db, DbRecord record, string author, string message)
+        {
+            //get all properties
+            var properties = record.GetType().GetProperties();
+            //save all modified properties
+            foreach (var p in properties)
+            {
+                db.StoreFieldSync(p, record, author, message);
+            }
+            db.SaveChanges();
+        }
+
+        public static void StoreFieldSync(this SheltersContext db, PropertyInfo info, DbRecord record, string author, string message)
+        {
+            var tableDescr = DbRecord.TableFieldIds[record.GetType().Name];
+            int tableId = tableDescr.Item1;
+            int fieldId;
+            try
+            {
+                fieldId = tableDescr.Item2[info.Name];
+            }
+            catch (KeyNotFoundException)
+            {
+                return;
+            }
+
+            Type type = info.PropertyType;
+            if (type.Name.Contains("Nullable"))
+            {
+                type = Nullable.GetUnderlyingType(type);
+            }
+            int typeId;
+            try
+            {
+                typeId = DbRecord.DataTypeIds[type.Name];
+            }
+            catch (Exception)
+            {
+                return;
+                //throw;
+            }
+
+            var fieldValue = info.GetValue(record);
+            //if (recordValue == null)
+            //{
+            //    return;
+            //}
+            //string value = recordValue.ToString();
+            string value = (fieldValue == null) ? "" : fieldValue.ToString();
+
+            FieldInstant oldField = null;
+            try
+            {
+                oldField = db.FieldInstants.First(r =>
+                                   r.TableId == tableId &&
+                                   r.RecordId == record.Id &&
+                                   r.FieldId == fieldId &&
+                                   r.DataTypeId == typeId &&
+                                   r.EndDate == null);
+            }
+            catch (InvalidOperationException)
+            { }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            if (oldField == null)
+            {
+                var newField = new FieldInstant()
+                {
+                    TableId = tableId,
+                    RecordId = record.Id,
+                    FieldId = fieldId,
+                    DataTypeId = typeId,
+                    Value = value,
+                    Author = author,
+                    Message = message,
+                    StartDate = DateTime.Now
+                };
+                db.FieldInstants.Add(newField);
+            }
+            else if (oldField.Value != value)
+            {
+                oldField.EndDate = DateTime.Now;
+                db.Entry(oldField).State = System.Data.Entity.EntityState.Modified;
+
+                var newField = new FieldInstant()
+                {
+                    TableId = tableId,
+                    RecordId = record.Id,
+                    FieldId = fieldId,
+                    DataTypeId = typeId,
+                    Value = value,
+                    Author = author,
+                    Message = message,
+                    StartDate = DateTime.Now
+                };
+                db.FieldInstants.Add(newField);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        //----------------------------------------------
+        //async
 
         public static async Task SaveRecord(this SheltersContext db, DbRecord record, string author, string message)
         {

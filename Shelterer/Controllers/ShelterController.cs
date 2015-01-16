@@ -99,11 +99,9 @@ namespace Shelterer.Controllers
         // GET: /Shelter/Create
         public ActionResult Create()
         {
-            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName");
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName");
-            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName");
-            ViewBag.MountainRangeId = db.MountainRanges.ToList();
-            ViewBag.RegionId = db.Regions.ToList();
+            ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName");
+            ViewBag.ObjectTypeId = new SelectList( db.ObjectTypes, "Id", "ObjectTypeName");
+            ViewBag.RegionId = new SelectList( db.Regions, "Id", "RegionName");
             return View();
         }
 
@@ -130,11 +128,9 @@ namespace Shelterer.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
-            ViewBag.ObjectTypeId = new SelectList(db.ObjectTypes, "Id", "ObjectTypeName", shelter.ObjectTypeId);
-            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
-            ViewBag.MountainRangeId = db.MountainRanges.ToList();
-            ViewBag.RegionId = db.Regions.ToList();
+            ViewBag.MountainRangeId = new SelectList(await db.MountainRanges.ToListAsync(), "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.ObjectTypeId = new SelectList(await db.ObjectTypes.ToListAsync(), "Id", "ObjectTypeName", shelter.ObjectTypeId);
+            ViewBag.RegionId = new SelectList(await db.Regions.ToListAsync(), "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 
@@ -150,11 +146,9 @@ namespace Shelterer.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.MountainRangeId = new SelectList(await db.MountainRanges.ToListAsync(), "Id", "MountainRangeName", shelter.MountainRangeId);
             ViewBag.ObjectTypeId = new SelectList(await db.ObjectTypes.ToListAsync(), "Id", "ObjectTypeName", shelter.ObjectTypeId);
-            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
-            ViewBag.MountainRangeId = await db.MountainRanges.ToListAsync();
-            ViewBag.RegionId = await db.Regions.ToListAsync();
+            ViewBag.RegionId = new SelectList(await db.Regions.ToListAsync(), "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 
@@ -181,11 +175,9 @@ namespace Shelterer.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            //ViewBag.MountainRangeId = new SelectList(db.MountainRanges, "Id", "MountainRangeName", shelter.MountainRangeId);
+            ViewBag.MountainRangeId = new SelectList(await db.MountainRanges.ToListAsync(), "Id", "MountainRangeName", shelter.MountainRangeId);
             ViewBag.ObjectTypeId = new SelectList(await db.ObjectTypes.ToListAsync(), "Id", "ObjectTypeName", shelter.ObjectTypeId);
-            //ViewBag.RegionId = new SelectList(db.Regions, "Id", "RegionName", shelter.RegionId);
-            ViewBag.MountainRangeId = await db.MountainRanges.ToListAsync();
-            ViewBag.RegionId = await db.Regions.ToListAsync();
+            ViewBag.RegionId = new SelectList(await db.Regions.ToListAsync(), "Id", "RegionName", shelter.RegionId);
             return View(shelter);
         }
 
